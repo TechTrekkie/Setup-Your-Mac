@@ -5,14 +5,14 @@
 # Setup Your Mac Configuration Download Estimation Tester
 #
 # This will allow you to quickly view and tweak the download estimates without having to re-run your Setup-Your-Mac script
-# until you achieve the desired output and copy the configuraiton parameter values to your Setup-Your-Mac script
+# until you achieve the desired output and copy the configuration parameter values to your Setup-Your-Mac script
 #
 ####################################################################################################
 #
 # HISTORY
 #
-#   Version 0.0.2, 19-Aug-2023, Andrew Spokes (@iDrewbs/@TechTrekkie)
-#   - Added variables and code for Install Buffers as well as the Catch-All calculation
+#   Version 0.0.3, 31-Oct-2023, Andrew Spokes (@iDrewbs/@TechTrekkie)
+#   - Added support for macOS 14
 # 
 ####################################################################################################
 
@@ -31,16 +31,16 @@ osVersion=$( sw_vers -productVersion )
 correctionCoefficient="1.00"            # "Fudge factor" (to help estimate match reality)
 
 configurationOneSize="60"               # Configuration One in Gibibits (i.e., Total File Size in Gigabytes * 7.451) 
-configurationOneInstallBuffer="0"           # Buffer time added to estimates to include installation time of packages, in seconds. Set to 0 to disable.
+configurationOneInstallBuffer="0"           # Buffer time added to estimates to include installation time of packages in seconds. Set to 0 to disable.
 
 configurationTwoSize="110"               # Configuration Two in Gibibits (i.e., Total File Size in Gigabytes * 7.451) 
-configurationTwoInstallBuffer="0"           # Buffer time added to estimates to include installation time of packages, in seconds. Set to 0 to disable. 
+configurationTwoInstallBuffer="0"           # Buffer time added to estimates to include installation time of packages in seconds. Set to 0 to disable. 
 
 configurationThreeSize="121"            # Configuration Three in Gibibits (i.e., Total File Size in Gigabytes * 7.451) 
-configurationThreeInstallBuffer="0"         # Buffer time added to estimates to include installation time of packages, in seconds. Set to 0 to disable. 
+configurationThreeInstallBuffer="0"         # Buffer time added to estimates to include installation time of packages in seconds. Set to 0 to disable. 
 
 configurationCatchAllSize="121"          # Catch-all Configuration in Gibibits (i.e., Total File Size in Gigabytes * 7.451) 
-configurationCatchAllInstallBuffer="0"      # Buffer time added to estimates to include installation time of packages, in seconds. Set to 0 to disable. 
+configurationCatchAllInstallBuffer="0"      # Buffer time added to estimates to include installation time of packages in seconds. Set to 0 to disable. 
 
 
 
@@ -71,7 +71,7 @@ function checkNetworkQualityConfigurations() {
 			dlEndDate="N/A; macOS ${osVersion}"
 		;;
 		
-		12* | 13* )
+		12* | 13* | 14* )
 			dlThroughput=$( get_json_value "$networkQualityTest" "dl_throughput")
 			dlResponsiveness=$( get_json_value "$networkQualityTest" "dl_responsiveness" )
 			dlStartDate=$( get_json_value "$networkQualityTest" "start_date" )
